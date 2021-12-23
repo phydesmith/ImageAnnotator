@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.Spinner?>
+
+<?import java.lang.Integer?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.TextField?>
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+            fx:id="primaryRoot"
+            fx:controller="io.javasmithy.PrimaryController" prefWidth="800"
+            prefHeight="800">
+    <top>
+        <VBox spacing="16" style="-fx-border-color: red; " alignment="CENTER">
+            <MenuBar>
+                <menus>
+                    <Menu mnemonicParsing="false" text="File">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="Open"/>
+                            <MenuItem mnemonicParsing="false" text="Exit" onAction="#exit"/>
+                        </items>
+                    </Menu>
+                    <Menu mnemonicParsing="false" text="View">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="Annotations" onAction="#switchToSecondary"/>
+                        </items>
+                    </Menu>
+                </menus>
+            </MenuBar>
+            <Label text="Settings" style="-fx-font-size: 32;"/>
+        </VBox>
+    </top>
+    <center>
+        <fx:define>
+            <Integer fx:id="min" fx:value="0"/>
+            <Integer fx:id="max" fx:value="5000"/>
+        </fx:define>
+        <VBox spacing="8" style="-fx-border-color: green;" alignment="CENTER" BorderPane.alignment="TOP_CENTER">
+            <Label text="Session Id" style="-fx-font-size: 24;" underline="true"/>
+            <HBox alignment="CENTER" spacing="8">
+                <TextField text="" prefHeight="16" prefWidth="128" fx:id="sessionIdField"/>
+            </HBox>
+            <Label text="Screen Capture" style="-fx-font-size: 24;" underline="true"/>
+            <Label text="X- and Y-offset: " style="-fx-font-size: 16;"/>
+            <HBox alignment="CENTER" spacing="8">
+                <Spinner fx:id="xOffsetSpinner" prefWidth="96" prefHeight="16" min="$min" max="$max" editable="true"/>
+                <Spinner fx:id="yOffsetSpinner" prefWidth="96" prefHeight="16" min="$min" max="$max" editable="true"/>
+            </HBox>
+            <Label text="Capture Height and Width: " style="-fx-font-size: 16;"/>
+            <HBox alignment="CENTER" spacing="8">
+                <Spinner fx:id="heightSpinner" prefWidth="96" prefHeight="16" min="$min" max="$max" editable="true"/>
+                <Spinner fx:id="widthSpinner" prefWidth="96" prefHeight="16" min="$min" max="$max" editable="true"/>
+            </HBox>
+            <Label text="Annotations" style="-fx-font-size: 24;" underline="true"/>
+            <CheckBox text="Normalize Coordinates?"  fx:id="normalizeCheckbox" selected="true" style="-fx-font-size: 16;"/>
+            <VBox alignment="BOTTOM_CENTER">
+                <Button fx:id="saveAndGoButton" text="Save" prefHeight="64" prefWidth="256" onAction="#switchToSecondary" style="-fx-font-size: 32;" BorderPane.alignment="BASELINE_CENTER"/>
+                <padding>
+                    <Insets top="64"/>
+                </padding>
+            </VBox>
+        </VBox>
+    </center>
+    <left>
+        <VBox spacing="8" style="-fx-border-color: purple;" alignment="CENTER" BorderPane.alignment="TOP_CENTER"
+              prefWidth="320">
+            <Label text="Detection Classes" style="-fx-font-size: 16;"/>
+            <TableView fx:id="classTableView" prefWidth="288" prefHeight="256">
+                <columns>
+                    <TableColumn text="Class" prefWidth="228" fx:id="detectionClassNameColumn"/>
+                    <TableColumn text="Id" prefWidth="58" fx:id="detectionClassIdColumn"/>
+                </columns>
+            </TableView>
+            <HBox alignment="CENTER" spacing="8">
+                <Button fx:id="addClassButton" onAction="#addDetectionClass" text="Add" prefHeight="32" prefWidth="48"/>
+                <Button fx:id="removeClassButton" onAction="#removeDetectionClass" text="Remove" prefHeight="32" prefWidth="64"/>
+            </HBox>
+            <padding>
+                <Insets top="16" bottom="16" left="16" right="16"/>
+            </padding>
+        </VBox>
+    </left>
+    <padding>
+        <Insets bottom="10.0"/>
+    </padding>
+</BorderPane>
